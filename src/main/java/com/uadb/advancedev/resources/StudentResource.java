@@ -2,6 +2,7 @@ package com.uadb.advancedev.resources;
 
 import com.uadb.advancedev.dto.StudentDTO;
 import com.uadb.advancedev.services.StudentService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,22 +19,24 @@ public class StudentResource {
 
 
     @PostMapping("/students")
-    public String save(@RequestBody StudentDTO studentDTO) {
+    public ResponseEntity<Void> save(@RequestBody StudentDTO studentDTO) {
 
         studentService.save(studentDTO);
 
-        return "Etudiant bien créé";
+        return ResponseEntity.status(201).build();
     }
 
     @GetMapping("/students")
-    public List<StudentDTO> getStudents() {
+    public ResponseEntity<List<StudentDTO>> getStudents() {
 
-        return studentService.getAllStudents();
+        return ResponseEntity.ok(studentService.getAllStudents());
     }
 
     @GetMapping("/students/{studentId}")
-    public Optional<StudentDTO> getStudentById(@PathVariable long studentId) {
+    public ResponseEntity<StudentDTO> getStudentById(@PathVariable long studentId) {
 
-        return studentService.getStudentById(studentId);
+
+        Optional<StudentDTO> studentByIdOpt = studentService.getStudentById(studentId);
+        return studentByIdOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
