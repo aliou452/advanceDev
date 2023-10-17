@@ -13,6 +13,6 @@ public class Professor {
 
     private String name;
 
-    @OneToMany
+    @OneToMany(mappedBy = "professor")
     private Set<Course> courseSet;
 }
