@@ -1,17 +1,15 @@
 package com.uadb.advancedev.entities;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
+@Entity
 public class Evaluation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private int value;
+    private int rating;
 
     @ManyToOne
     private Professor professor;

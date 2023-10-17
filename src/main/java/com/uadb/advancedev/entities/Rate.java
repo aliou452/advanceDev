@@ -7,10 +7,10 @@ import jakarta.persistence.*;
 public class Rate {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private RateValue value;
+    private RateValue rating;
 
     @ManyToOne
     private Course course;
