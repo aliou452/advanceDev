@@ -10,5 +10,6 @@ import lombok.*;
 @EqualsAndHashCode
 public class StudentDTO {
 
+    private long id;
     private String name;
 }

@@ -7,6 +7,7 @@ import com.uadb.advancedev.services.StudentService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -34,8 +35,26 @@ public class StudentServiceImpl implements StudentService {
 
             StudentDTO studentDTO = new StudentDTO();
             studentDTO.setName(student.getName());
+            studentDTO.setId(student.getId());
 
             return studentDTO;
         }).toList();
+    }
+
+    @Override
+    public Optional<StudentDTO> getStudentById(long idStudent) {
+        Optional<Student> studentOpt = studentRepository.findById(idStudent);
+
+        if(studentOpt.isPresent()) {
+            Student student = studentOpt.get();
+            StudentDTO studentDTO = new StudentDTO();
+
+            studentDTO.setId(student.getId());
+            studentDTO.setName(student.getName());
+
+            return Optional.of(studentDTO);
+        }
+
+        return Optional.empty();
     }
 }

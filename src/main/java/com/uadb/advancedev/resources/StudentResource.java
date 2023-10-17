@@ -2,12 +2,10 @@ package com.uadb.advancedev.resources;
 
 import com.uadb.advancedev.dto.StudentDTO;
 import com.uadb.advancedev.services.StudentService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class StudentResource {
@@ -31,5 +29,11 @@ public class StudentResource {
     public List<StudentDTO> getStudents() {
 
         return studentService.getAllStudents();
+    }
+
+    @GetMapping("/students/{studentId}")
+    public Optional<StudentDTO> getStudentById(@PathVariable long studentId) {
+
+        return studentService.getStudentById(studentId);
     }
 }
