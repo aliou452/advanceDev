@@ -1,10 +1,17 @@
 package com.uadb.advancedev.entities;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@EqualsAndHashCode
 public class Student {
 
     @Id
