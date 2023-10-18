@@ -16,4 +16,6 @@ public interface StudentService {
 
     Optional<StudentDTO> getStudentById(long idStudent);
 
+    void joinClass(long studentId, long courseId);
+
 }
