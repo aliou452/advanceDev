@@ -61,11 +61,16 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void joinClass(long studentId, long courseId) {
 
+        // Find the student and the course or else raised an exception
         Student student = studentRepository.findById(studentId).orElseThrow();
         Course course = courseRepository.findById(courseId).orElseThrow();
 
+        // Save student into course table
         Set<Student> studentSet = course.getStudentSet();
         studentSet.add(student);
         course.setStudentSet(studentSet);
+
+        // Save update into database
+        courseRepository.save(course);
     }
 }

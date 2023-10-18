@@ -24,6 +24,6 @@ public class Course {
     @ManyToOne
     private Professor professor;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "courseSet")
     private Set<Student> studentSet;
 }
