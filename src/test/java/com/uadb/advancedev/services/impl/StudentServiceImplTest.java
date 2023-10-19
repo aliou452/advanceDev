@@ -4,12 +4,16 @@ import com.uadb.advancedev.dto.StudentDTO;
 import com.uadb.advancedev.entities.Student;
 import com.uadb.advancedev.repositories.StudentRepository;
 import com.uadb.advancedev.services.StudentService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+
+import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -19,7 +23,7 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 class StudentServiceImplTest {
 
-
+    private final static String studentName = "Serigne";
     @Autowired
     private StudentService studentService;
 
@@ -45,15 +49,53 @@ class StudentServiceImplTest {
     @Test
     void getAllStudents() {
 
+        when(studentRepositoryMock.findAllWithCourse()).thenReturn(getStudentList());
+
+        List<StudentDTO> allStudents = studentService.getAllStudents();
+
+        assertEquals(1, allStudents.size());
+        assertEquals("Fatou", allStudents.get(0).getName());
+        assertEquals(1L, allStudents.get(0).getId());
     }
 
     @Test
-    void getStudentById() {
+    void getStudent_whenStudentExist() {
+        long studentId = 1L;
+        when(studentRepositoryMock.findById(studentId))
+                .thenReturn(Optional.of(getStudent(studentId, studentName)));
+
+        Optional<StudentDTO> studentDTOOptional = studentService.getStudentById(studentId);
+
+        assertTrue(studentDTOOptional.isPresent());
+        StudentDTO studentDTO = studentDTOOptional.get();
+        assertEquals(studentId, studentDTO.getId());
+        assertEquals(studentName, studentDTO.getName());
     }
 
+    @Test
+    void getStudent_whenStudentDoesNotExist() {
+        long studentId = 1L;
+        when(studentRepositoryMock.findById(studentId))
+                .thenReturn(Optional.empty());
+
+        Optional<StudentDTO> studentDTOOptional = studentService.getStudentById(studentId);
+
+        assertFalse(studentDTOOptional.isPresent());
+    }
     private StudentDTO getStudentDTO(String name) {
         StudentDTO studentDTO = new StudentDTO();
         studentDTO.setName(name);
         return studentDTO;
+    }
+
+    private Student getStudent(long id, String name) {
+        Student student = new Student();
+        student.setName(name);
+        student.setId(id);
+        return student;
+    }
+
+    private List<Student> getStudentList() {
+        return List.of(getStudent(1, "Fatou"));
     }
 }
