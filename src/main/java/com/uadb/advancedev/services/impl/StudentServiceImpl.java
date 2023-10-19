@@ -32,7 +32,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<StudentDTO> getAllStudents() {
 
-        List<Student> studentList = studentRepository.findAllWithCourse();
+        List<Student> studentList = studentRepository.findAll();
         return studentMapper.toDto(studentList);
     }
 
