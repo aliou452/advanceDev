@@ -34,7 +34,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<StudentDTO> getAllStudents() {
-        log.info("Get all student service");
+        log.info("Get all students service");
 
         List<Student> studentList = studentRepository.findAll();
         return studentMapper.toDto(studentList);
@@ -42,6 +42,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public StudentDTO getStudentById(long idStudent) {
+        log.info("Get student by id");
         Student student = studentRepository.findById(idStudent)
                 .orElseThrow(() -> new EntityNotFoundException("Student with id " + idStudent + " not found"));
 
