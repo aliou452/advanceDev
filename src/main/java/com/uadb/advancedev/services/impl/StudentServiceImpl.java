@@ -6,12 +6,16 @@ import com.uadb.advancedev.mappers.StudentMapper;
 import com.uadb.advancedev.repositories.StudentRepository;
 import com.uadb.advancedev.services.StudentService;
 import jakarta.persistence.EntityNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class StudentServiceImpl implements StudentService {
+
+    private final Logger log = LoggerFactory.getLogger(StudentServiceImpl.class);
 
     private final StudentRepository studentRepository;
     private final StudentMapper studentMapper;
@@ -30,6 +34,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<StudentDTO> getAllStudents() {
+        log.info("Get all student service");
 
         List<Student> studentList = studentRepository.findAll();
         return studentMapper.toDto(studentList);
