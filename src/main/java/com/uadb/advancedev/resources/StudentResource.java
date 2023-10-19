@@ -34,10 +34,7 @@ public class StudentResource {
 
     @GetMapping("/students/{studentId}")
     public ResponseEntity<StudentDTO> getStudentById(@PathVariable long studentId) {
-
-
-        Optional<StudentDTO> studentByIdOpt = studentService.getStudentById(studentId);
-        return studentByIdOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return ResponseEntity.ok(studentService.getStudentById(studentId));
     }
 
 }

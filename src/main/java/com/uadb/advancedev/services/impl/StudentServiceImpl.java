@@ -3,13 +3,12 @@ package com.uadb.advancedev.services.impl;
 import com.uadb.advancedev.dto.StudentDTO;
 import com.uadb.advancedev.entities.Student;
 import com.uadb.advancedev.mappers.StudentMapper;
-import com.uadb.advancedev.repositories.CourseRepository;
 import com.uadb.advancedev.repositories.StudentRepository;
 import com.uadb.advancedev.services.StudentService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -37,20 +36,13 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Optional<StudentDTO> getStudentById(long idStudent) {
-        Optional<Student> studentOpt = studentRepository.findById(idStudent);
+    public StudentDTO getStudentById(long idStudent) {
+        Student student = studentRepository.findById(idStudent)
+                .orElseThrow(() -> new EntityNotFoundException("Student with id " + idStudent + " not found"));
 
-        if(studentOpt.isPresent()) {
-            Student student = studentOpt.get();
-            StudentDTO studentDTO = new StudentDTO();
 
-            studentDTO.setId(student.getId());
-            studentDTO.setName(student.getName());
+        return studentMapper.toDto(student);
 
-            return Optional.of(studentDTO);
-        }
-
-        return Optional.empty();
     }
 
 }
