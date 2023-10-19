@@ -2,6 +2,7 @@ package com.uadb.advancedev.resources;
 
 import com.uadb.advancedev.dto.CourseDTO;
 import com.uadb.advancedev.services.CourseService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public class CourseResource {
 
 
     @PostMapping("/courses")
-    public ResponseEntity<Void> save(@RequestBody CourseDTO courseDTO) {
+    public ResponseEntity<Void> save(@Valid @RequestBody CourseDTO courseDTO) {
 
         courseService.save(courseDTO);
 

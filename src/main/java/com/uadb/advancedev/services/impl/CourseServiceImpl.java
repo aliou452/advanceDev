@@ -5,6 +5,7 @@ import com.uadb.advancedev.entities.Course;
 import com.uadb.advancedev.mappers.CourseMapper;
 import com.uadb.advancedev.repositories.CourseRepository;
 import com.uadb.advancedev.services.CourseService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,7 +30,8 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public CourseDTO getCourseById(long courseId) {
 
-        Course course = courseRepository.findById(courseId).orElseThrow();
+        Course course = courseRepository.findById(courseId)
+                .orElseThrow(() -> new EntityNotFoundException("Course with id " + courseId + " not found"));
         return courseMapper.toDto(course);
     }
 
