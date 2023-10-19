@@ -51,4 +51,10 @@ public class StudentServiceImpl implements StudentService {
 
     }
 
+    @Override
+    public List<StudentDTO> searchStudent(String name) {
+        List<Student> students = studentRepository.findByName(name);
+        return studentMapper.toDto(students);
+    }
+
 }

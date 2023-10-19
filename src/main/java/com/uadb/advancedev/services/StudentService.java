@@ -15,4 +15,5 @@ public interface StudentService {
 
     StudentDTO getStudentById(long idStudent);
 
+    List<StudentDTO> searchStudent(String name);
 }

@@ -41,4 +41,10 @@ public class StudentResource {
         return ResponseEntity.ok(studentService.getStudentById(studentId));
     }
 
+    @GetMapping("/students/search")
+    public ResponseEntity<List<StudentDTO>> searchStudent(@RequestParam String name) {
+
+        return ResponseEntity.ok(studentService.searchStudent(name));
+    }
+
 }

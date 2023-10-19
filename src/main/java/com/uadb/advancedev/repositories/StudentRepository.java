@@ -10,8 +10,6 @@ import java.util.List;
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Long> {
 
-
-    @Query(value = "SELECT DISTINCT s FROM Student s LEFT JOIN FETCH s.courses")
-    List<Student> findAllWithCourse();
+    List<Student> findByName(String name);
 
 }

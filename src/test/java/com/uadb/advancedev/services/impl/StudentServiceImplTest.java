@@ -6,6 +6,7 @@ import com.uadb.advancedev.entities.Student;
 import com.uadb.advancedev.repositories.StudentRepository;
 import com.uadb.advancedev.services.StudentService;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
