@@ -1,19 +1,19 @@
 package com.uadb.advancedev.services.impl;
 
 import com.uadb.advancedev.dto.StudentDTO;
+import com.uadb.advancedev.entities.Course;
 import com.uadb.advancedev.entities.Student;
 import com.uadb.advancedev.repositories.StudentRepository;
 import com.uadb.advancedev.services.StudentService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -21,7 +21,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-class StudentServiceImplTest {
+public class StudentServiceImplTest {
 
     private final static String studentName = "Serigne";
     @Autowired
@@ -88,10 +88,14 @@ class StudentServiceImplTest {
         return studentDTO;
     }
 
-    private Student getStudent(long id, String name) {
+    public static Student getStudent(long id, String name) {
         Student student = new Student();
         student.setName(name);
         student.setId(id);
+        Course course = new Course();
+        course.setName("JUNIT");
+        course.setId(1);
+        student.setCourseSet(Set.of(course));
         return student;
     }
 
