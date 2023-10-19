@@ -1,7 +1,6 @@
 package com.uadb.advancedev.services.impl;
 
 import com.uadb.advancedev.dto.StudentDTO;
-import com.uadb.advancedev.entities.Course;
 import com.uadb.advancedev.entities.Student;
 import com.uadb.advancedev.mappers.StudentMapper;
 import com.uadb.advancedev.repositories.CourseRepository;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -30,14 +28,14 @@ public class StudentServiceImpl implements StudentService {
     public void save(StudentDTO studentDTO) {
 
         Student student = studentMapper.toEntity(studentDTO);
-
+        courseRepository.saveAll(student.getCourseSet());
         studentRepository.save(student);
     }
 
     @Override
     public List<StudentDTO> getAllStudents() {
 
-        List<Student> studentList = studentRepository.findAll();
+        List<Student> studentList = studentRepository.findAllWithCourse();
         return studentMapper.toDto(studentList);
     }
 
@@ -58,19 +56,4 @@ public class StudentServiceImpl implements StudentService {
         return Optional.empty();
     }
 
-    @Override
-    public void joinClass(long studentId, long courseId) {
-
-        // Find the student and the course or else raised an exception
-        Student student = studentRepository.findById(studentId).orElseThrow();
-        Course course = courseRepository.findById(courseId).orElseThrow();
-
-        // Save student into course table
-        Set<Student> studentSet = course.getStudentSet();
-        studentSet.add(student);
-        course.setStudentSet(studentSet);
-
-        // Save update into database
-        courseRepository.save(course);
-    }
 }

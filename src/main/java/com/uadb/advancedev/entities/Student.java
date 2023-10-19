@@ -3,6 +3,7 @@ package com.uadb.advancedev.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -20,6 +21,11 @@ public class Student {
 
     private String name;
 
-    @ManyToMany
-    private Set<Course> courseSet;
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "joined_courses",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
+    private Set<Course> courseSet = new HashSet<>();
 }

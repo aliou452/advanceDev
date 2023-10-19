@@ -40,11 +40,4 @@ public class StudentResource {
         return studentByIdOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping("/students/{studentId}/courses/{courseId}")
-    public ResponseEntity<Void> joinClass(@PathVariable Long courseId, @PathVariable Long studentId) {
-
-        studentService.joinClass(studentId, courseId);
-
-        return ResponseEntity.ok().build();
-    }
 }

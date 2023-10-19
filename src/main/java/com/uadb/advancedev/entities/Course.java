@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -25,5 +26,5 @@ public class Course {
     private Professor professor;
 
     @ManyToMany(mappedBy = "courseSet")
-    private Set<Student> studentSet;
+    private Set<Student> studentSet = new HashSet<>();
 }

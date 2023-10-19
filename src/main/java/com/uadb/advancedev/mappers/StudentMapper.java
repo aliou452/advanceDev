@@ -15,7 +15,9 @@ public interface StudentMapper extends EntityMapper<StudentDTO, Student>{
     @Mapping(source = "courseSet", target = "courseDTOSet")
     StudentDTO toDto(Student student);
 
+    @Mapping(source = "courseDTOSet", target = "courseSet")
     Student toEntity(StudentDTO studentDTO);
 
+    @Mapping(source = "courseSet", target = "courseDTOSet")
     List<StudentDTO> toDto(List<Student> studentList);
 }
