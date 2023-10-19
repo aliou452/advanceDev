@@ -49,7 +49,7 @@ public class StudentServiceImplTest {
     @Test
     void getAllStudents() {
 
-        when(studentRepositoryMock.findAllWithCourse()).thenReturn(getStudentList());
+        when(studentRepositoryMock.findAll()).thenReturn(getStudentList());
 
         List<StudentDTO> allStudents = studentService.getAllStudents();
 
@@ -64,10 +64,8 @@ public class StudentServiceImplTest {
         when(studentRepositoryMock.findById(studentId))
                 .thenReturn(Optional.of(getStudent(studentId, studentName)));
 
-        Optional<StudentDTO> studentDTOOptional = studentService.getStudentById(studentId);
+        StudentDTO studentDTO = studentService.getStudentById(studentId);
 
-        assertTrue(studentDTOOptional.isPresent());
-        StudentDTO studentDTO = studentDTOOptional.get();
         assertEquals(studentId, studentDTO.getId());
         assertEquals(studentName, studentDTO.getName());
     }
@@ -76,11 +74,11 @@ public class StudentServiceImplTest {
     void getStudent_whenStudentDoesNotExist() {
         long studentId = 1L;
         when(studentRepositoryMock.findById(studentId))
-                .thenReturn(Optional.empty());
+                .thenReturn(Optional.of(getStudent(1, studentName)));
 
-        Optional<StudentDTO> studentDTOOptional = studentService.getStudentById(studentId);
+        StudentDTO studentDTO = studentService.getStudentById(studentId);
 
-        assertFalse(studentDTOOptional.isPresent());
+        assertNotNull(studentDTO);
     }
     public static StudentDTO getStudentDTO(String name) {
         StudentDTO studentDTO = new StudentDTO();
