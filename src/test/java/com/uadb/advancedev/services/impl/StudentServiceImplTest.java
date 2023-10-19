@@ -82,7 +82,7 @@ public class StudentServiceImplTest {
 
         assertFalse(studentDTOOptional.isPresent());
     }
-    private StudentDTO getStudentDTO(String name) {
+    public static StudentDTO getStudentDTO(String name) {
         StudentDTO studentDTO = new StudentDTO();
         studentDTO.setName(name);
         return studentDTO;
