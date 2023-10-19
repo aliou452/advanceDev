@@ -16,19 +16,16 @@ public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
     private final StudentMapper studentMapper;
-    private final CourseRepository courseRepository;
 
-    public StudentServiceImpl(StudentRepository studentRepository, StudentMapper studentMapper, CourseRepository courseRepository) {
+    public StudentServiceImpl(StudentRepository studentRepository, StudentMapper studentMapper) {
         this.studentRepository = studentRepository;
         this.studentMapper = studentMapper;
-        this.courseRepository = courseRepository;
     }
 
     @Override
     public void save(StudentDTO studentDTO) {
 
         Student student = studentMapper.toEntity(studentDTO);
-        courseRepository.saveAll(student.getCourseSet());
         studentRepository.save(student);
     }
 
