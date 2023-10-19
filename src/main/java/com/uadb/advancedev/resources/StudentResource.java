@@ -47,4 +47,12 @@ public class StudentResource {
         return ResponseEntity.ok(studentService.searchStudent(name));
     }
 
+    @PutMapping("/students")
+    public ResponseEntity<Void> updateStudent(@RequestBody StudentDTO studentDTO) {
+
+        studentService.update(studentDTO);
+
+        return ResponseEntity.ok().build();
+    }
+
 }

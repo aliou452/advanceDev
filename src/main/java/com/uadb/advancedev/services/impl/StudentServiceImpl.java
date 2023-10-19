@@ -57,4 +57,11 @@ public class StudentServiceImpl implements StudentService {
         return studentMapper.toDto(students);
     }
 
+    @Override
+    public void update(StudentDTO studentDTO) {
+
+        Student student = studentMapper.toEntity(studentDTO);
+        studentRepository.save(student);
+    }
+
 }
