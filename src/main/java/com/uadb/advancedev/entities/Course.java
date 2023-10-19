@@ -1,8 +1,7 @@
 package com.uadb.advancedev.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
 import lombok.Getter;
@@ -30,6 +29,7 @@ public class Course {
     private Professor professor;
 
     @ManyToMany(mappedBy = "courses")
+    @JsonIgnoreProperties(value = "courses")
     private Set<Student> students = new HashSet<>();
 
     @Override

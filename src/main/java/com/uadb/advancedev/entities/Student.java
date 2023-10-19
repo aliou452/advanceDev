@@ -1,6 +1,5 @@
 package com.uadb.advancedev.entities;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
