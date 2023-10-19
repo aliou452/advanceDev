@@ -35,6 +35,6 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public List<CourseDTO> getAllCourses() {
-        return courseMapper.toDto(courseRepository.findAll());
+        return courseMapper.toDto(courseRepository.findAllWithStudents());
     }
 }

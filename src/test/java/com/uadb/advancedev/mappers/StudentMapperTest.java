@@ -25,8 +25,8 @@ class StudentMapperTest {
 
         assertEquals(1, studentDTO.getId());
         assertEquals(name, studentDTO.getName());
-        assertEquals(1, studentDTO.getCourseDTOSet().size());
-        Set<CourseDTO> courseDTOSet = studentDTO.getCourseDTOSet();
+        assertEquals(1, studentDTO.getCourseDTOs().size());
+        Set<CourseDTO> courseDTOSet = studentDTO.getCourseDTOs();
         CourseDTO courseDTO = courseDTOSet.stream().toList().get(0);
         assertEquals("JUNIT", courseDTO.getName());
     }

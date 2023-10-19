@@ -11,9 +11,10 @@ import java.util.List;
 public interface CourseMapper extends EntityMapper<CourseDTO, Course> {
 
 
-    @Mapping(source = "studentSet", target = "studentDTOSet")
+    @Mapping(source = "students", target = "studentDTOs")
     CourseDTO toDto(Course course);
 
+    @Mapping(source = "studentDTOs", target = "students")
     Course toEntity(CourseDTO courseDTO);
 
     List<Course> toEntity(List<CourseDTO> courseDTOList);

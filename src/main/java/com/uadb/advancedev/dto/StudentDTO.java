@@ -14,5 +14,5 @@ public class StudentDTO {
 
     private long id;
     private String name;
-    private Set<CourseDTO> courseDTOSet;
+    private Set<CourseDTO> courseDTOs;
 }

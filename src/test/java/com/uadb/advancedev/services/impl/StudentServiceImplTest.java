@@ -95,7 +95,7 @@ public class StudentServiceImplTest {
         Course course = new Course();
         course.setName("JUNIT");
         course.setId(1);
-        student.setCourseSet(Set.of(course));
+        student.setCourses(Set.of(course));
         return student;
     }
 

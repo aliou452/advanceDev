@@ -1,5 +1,6 @@
 package com.uadb.advancedev.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -25,6 +26,6 @@ public class Course {
     @ManyToOne
     private Professor professor;
 
-    @ManyToMany(mappedBy = "courseSet")
-    private Set<Student> studentSet = new HashSet<>();
+    @ManyToMany(mappedBy = "courses")
+    private Set<Student> students = new HashSet<>();
 }
